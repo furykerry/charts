@@ -1,4 +1,4 @@
-# Kruise v1.8.0
+# Kruise v1.9.0
 
 ## Configuration
 

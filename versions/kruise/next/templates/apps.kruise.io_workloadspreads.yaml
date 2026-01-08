@@ -5,7 +5,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.17.3
   name: workloadspreads.apps.kruise.io
 spec:
   group: apps.kruise.io
@@ -149,11 +149,13 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: atomic
                                   required:
                                   - key
                                   - operator
                                   type: object
                                 type: array
+                                x-kubernetes-list-type: atomic
                               matchFields:
                                 description: A list of node selector requirements
                                   by node's fields.
@@ -181,11 +183,13 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: atomic
                                   required:
                                   - key
                                   - operator
                                   type: object
                                 type: array
+                                x-kubernetes-list-type: atomic
                             type: object
                             x-kubernetes-map-type: atomic
                           weight:
@@ -229,11 +233,13 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: atomic
                             required:
                             - key
                             - operator
                             type: object
                           type: array
+                          x-kubernetes-list-type: atomic
                         matchFields:
                           description: A list of node selector requirements by node's
                             fields.
@@ -261,11 +267,13 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: atomic
                             required:
                             - key
                             - operator
                             type: object
                           type: array
+                          x-kubernetes-list-type: atomic
                       type: object
                       x-kubernetes-map-type: atomic
                     tolerations:
@@ -324,7 +332,6 @@ spec:
                       the target workload after filtering. If this list is not empty, WorkloadSpread will look for the corresponding
                       values in the target resource according to each path, and treat the sum of these values as the total number of replicas after filtering.
 
-
                       The replicas path is a dot-separated path, similar to "spec.replicas". If there are arrays, you can use numbers to denote indexes, like "subsets.1.replicas".
                       The real values of these paths must be integers.
                     items:
@@ -359,11 +366,13 @@ spec:
                               items:
                                 type: string
                               type: array
+                              x-kubernetes-list-type: atomic
                           required:
                           - key
                           - operator
                           type: object
                         type: array
+                        x-kubernetes-list-type: atomic
                       matchLabels:
                         additionalProperties:
                           type: string
