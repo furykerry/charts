@@ -752,7 +752,6 @@ rules:
   - ""
   resources:
   - pods/ephemeralcontainers
-  - pods/resize
   verbs:
   - get
   - patch
@@ -761,6 +760,7 @@ rules:
   - ""
   resources:
   - pods/status
+  - pods/resize
   verbs:
   - get
   - patch
