@@ -45,6 +45,7 @@ install-agents-sandbox-manager-from-local:
 		--set replicaCount=1 \
         --set-json 'controller.resources={"cpu":"500m","memory":"512Mi"}' \
         --set-json 'gateway.resources={"cpu":"500m","memory":"512Mi"}' \
+		--set gateway.envoy.concurrency=1 \
 		--set e2b.adminApiKey='adminApiKey' \
 		--set ingress.className='alb' \
 		--set gateway.replicaCount=1
