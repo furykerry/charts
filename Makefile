@@ -12,15 +12,14 @@ install-kruise-from-helm:
 	./scripts/check-kruise.sh
 
 # wait-for-pods first polls until pods matching the label selector exist, then
-# waits for them to become Ready. This avoids the race condition where kubectl
-# wait fails immediately with "no matching resources found" because pods have
-# not been created yet (e.g. when a mutating webhook delays pod creation).
+# waits for them to become Ready. On failure, runs diagnose.sh to dump cluster
+# state for debugging (deployment status, events, webhook configs, manager logs).
 wait-for-pods = \
 	for i in $$(seq 1 30); do \
 	  kubectl -n $(1) get pods -l $(2) --no-headers 2>/dev/null | grep -q . && break; \
 	  sleep 2; \
 	done; \
-	kubectl -n $(1) wait --for=condition=Ready pods -l $(2) --timeout=120s
+	kubectl -n $(1) wait --for=condition=Ready pods -l $(2) --timeout=120s || { echo "\nERROR: pods not ready in namespace $(1) with selector $(2)\n"; ./scripts/diagnose.sh $(1) $(2); exit 1; }
 
 .PHONY: install-kruise-state-metrics-from-local
 install-kruise-state-metrics-from-local:
